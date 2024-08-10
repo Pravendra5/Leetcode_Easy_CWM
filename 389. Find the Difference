@@ -1,0 +1,99 @@
+************************************************************************************************Java**************************************************************************************************************************
+// Approach-1
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for(char ch : s.toCharArray()){
+            map.put(ch, map.getOrDefault(ch, 0)+1);
+        }
+
+         for(char ch : t.toCharArray()){
+            map.put(ch, map.getOrDefault(ch, 0)-1);
+
+            if(map.get(ch) < 0) return ch;
+        }
+        return 'a';
+    }
+}
+
+// Approach-2
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+
+        int sum = 0;
+
+        for(char ch : t.toCharArray()){
+            sum += ch;
+        }
+        for(char ch : s.toCharArray()){
+            sum -= ch;
+        }
+        return (char)sum;
+    }
+}
+
+// Approach-3
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+
+        int XOR = 0;
+
+        for(char ch : t.toCharArray()){
+            XOR ^= ch;
+        }
+        for(char ch : s.toCharArray()){
+            XOR ^= ch;
+        }
+        return (char)XOR;
+    }
+}
+
+************************************************************************************************Python**************************************************************************************************************************
+// Approach-1
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        XOR = 0
+
+        for ch in t:
+            XOR ^= ord(ch)
+
+        for ch in s:
+            XOR ^= ord(ch)
+
+        return chr(XOR)
+
+// Approach-2
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        Sum = 0
+
+        for ch in t:
+            Sum += ord(ch)
+
+        for ch in s:
+            Sum -= ord(ch)
+
+        return chr(Sum)
+
+
+// Approach-3
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        count = {}
+
+        for ch in s:
+            count[ch] = count.get(ch, 0)+1
+
+        for ch in t:
+            count[ch] = count.get(ch, 0)-1
+            if count[ch] < 0:
+                return ch
+        return 'a'
