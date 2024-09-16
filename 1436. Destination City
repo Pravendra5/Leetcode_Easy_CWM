@@ -1,0 +1,83 @@
+
+****************************************************************************************Python****************************************************************************
+
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        mp = {}
+
+        # First loop: populate the dictionary with source cities
+        for path in paths:
+            source = path[0]
+            mp[source] = mp.get(source, 0) + 1
+
+        # Second loop: check for the destination city that isn't a source
+        for path in paths:
+            dest = path[1]
+            if mp.get(dest, 0) == 0:
+                return dest
+
+        return ""
+
+//Approach HashSet
+
+class Solution:
+    def destCity(self, paths: List[List[str]]) -> str:
+        st = set()
+
+        # First loop: add source cities to the set
+        for path in paths:
+            source = path[0]
+            st.add(source)
+
+        # Second loop: find the destination city that is not a source
+        for path in paths:
+            dest = path[1]
+            if dest not in st:
+                return dest
+
+        return ""
+
+****************************************************************************************JAVA****************************************************************************
+
+class Solution {
+    public String destCity(List<List<String>> paths) {
+        Map<String, Integer>mp = new HashMap<>();
+
+        for(List<String>path: paths){
+            String source = path.get(0);
+
+            mp.put(source, mp.getOrDefault(source, 0)+1);
+        }
+        for(List<String>path: paths){
+            String dest = path.get(1);
+
+            if(mp.getOrDefault(dest, 0) == 0){
+                return dest;
+            }
+        }
+       return "";
+    }
+}
+
+//Approach 2
+
+class Solution {
+    public String destCity(List<List<String>> paths) {
+        Set<String>st = new HashSet<>();
+
+        for(List<String>path: paths){
+            String source = path.get(0);
+
+            st.add(source);
+        }
+        for(List<String>path: paths){
+            String dest = path.get(1);
+
+            if(!st.contains(dest)){
+                return dest;
+            }
+        }
+       return "";
+    }
+}
